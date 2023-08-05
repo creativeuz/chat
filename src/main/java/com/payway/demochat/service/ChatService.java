@@ -91,5 +91,6 @@ public class ChatService {
         Room room =
             roomRepository.findById(UUID.fromString(roomId)).orElseThrow(() -> new UserNotFoundException(roomId));
         room.setClosed(true);
+        roomRepository.save(room);
     }
 }

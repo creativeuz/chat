@@ -6,6 +6,7 @@ To use this application you need first create user and customer support(named CS
 After that you will create room using their ids.
 After that you can send messages.
 Finally, you need to close the room so in the future conversation it won't be shown to users.
+Each time new room opens users won't see their past conversations.
 
 Here are Postman request code snippets. Use them for testing(replace ids and other parameters with your input):
 

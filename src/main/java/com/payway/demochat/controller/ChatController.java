@@ -67,6 +67,7 @@ public class ChatController {
     // marking room as closed will make it unavailable for users
     // after room closed no one will be able to see messages
     @PostMapping("closeRoom")
+    @ResponseBody
     public void closeRoom(@RequestParam String roomId) {
         chatService.close(roomId);
     }
