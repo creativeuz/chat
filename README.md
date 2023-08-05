@@ -9,15 +9,15 @@ Finally, you need to close the room so in the future conversation it won't be sh
 
 Here are Postman request code snippets. Use them for testing(replace ids and other parameters with your input):
 
-1. Creating new User
+1. Creating new User.
    curl --location --request POST 'http://localhost:8080/newUser?name=doctor' \
    --data ''
 
-2. Creating new Customer Support
+2. Creating new Customer Support.
    curl --location --request POST 'http://localhost:8080/newCS?name=doctor' \
    --data ''
 
-3. Sending Message
+3. Sending Message.
    curl --location 'http://localhost:8080/send' \
    --header 'Content-Type: application/json' \
    --data '{
@@ -27,14 +27,14 @@ Here are Postman request code snippets. Use them for testing(replace ids and oth
    "roomId": "8ba25697-dc84-4d2c-a4f3-d09cedc352e0"
    }'
 
-4. Creating new Room(before messaging you need to create room for users)
+4. Creating new Room(before messaging you need to create room for users).
    curl --location --request
    POST 'http://localhost:8080/newRoom?staff=f0cddfa8-d6be-4b4c-a584-6024b5613c56&consumer=d4bec73f-7a5f-4973-89a3-60a77d01a58c'
 
-5. Closing Room(it is done when conversation ended)
+5. Closing Room(it is done when conversation ended).
    curl --location --request POST 'http://localhost:8080/closeRoom?roomId=8ba25697-dc84-4d2c-a4f3-d09cedc352e0'
 
-6. Getting messages in this room(if room is closed it won't return anything)
+6. Getting messages in this room(if room is closed it won't return anything).
    curl --location 'http://localhost:8080/get?roomId=8ba25697-dc84-4d2c-a4f3-d09cedc352e0'
 
 
