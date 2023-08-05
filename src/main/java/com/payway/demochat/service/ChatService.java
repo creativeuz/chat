@@ -36,14 +36,13 @@ public class ChatService {
         this.cSRepository = cSRepository;
     }
 
-
     public void addUser(String name) {
         userRepository.save(new User(name));
     }
 
     public void sendMessage(String senderId, String receiverId, String content, String roomId) {
         // error check
-        if (senderId.equals(null) || receiverId.equals(null) || content.equals(null) || roomId.equals(null)) {
+        if (senderId == null || receiverId == null || content == null || roomId == null) {
             return;
         }
 

@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Entity
@@ -33,15 +33,15 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "room")
     Room room;
-    @Column(name = "sent_time")
-    private Date sentTime;
+    @Column(name = "sent_time", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private ZonedDateTime sentTime;
     @Column(name = "content")
     private String content;
 
     @PrePersist
     protected void onCreate() {
         if (this.sentTime == null) {
-            this.sentTime = new Date();
+            this.sentTime = ZonedDateTime.now();
         }
     }
 

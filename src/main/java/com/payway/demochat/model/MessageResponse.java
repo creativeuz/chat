@@ -3,15 +3,16 @@ package com.payway.demochat.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
 @Setter
 public class MessageResponse {
+
     private UUID id;
     private UUID senderId;
     private UUID receiverId;
-    private Date sentTime;
+    private ZonedDateTime sentTime;
     private String content;
 }
