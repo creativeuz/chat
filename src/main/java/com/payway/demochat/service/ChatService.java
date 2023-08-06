@@ -36,8 +36,14 @@ public class ChatService {
         this.cSRepository = cSRepository;
     }
 
-    public void addUser(String name) {
-        userRepository.save(new User(name));
+    public String addUser(String name) {
+        User save = userRepository.save(new User(name));
+        return save.getId().toString();
+    }
+
+    public String addCS(String name) {
+        CS save = cSRepository.save(new CS(name));
+        return save.getId().toString();
     }
 
     public void sendMessage(String senderId, String receiverId, String content, String roomId) {
@@ -75,16 +81,14 @@ public class ChatService {
         return result;
     }
 
-    public void addCS(String name) {
-        cSRepository.save(new CS(name));
-    }
-
-    public void createRoom(String staff, String consumer) {
+    public String createRoom(String staff, String consumer) {
         CS cs = cSRepository.findById(UUID.fromString(staff)).orElseThrow(() -> new UserNotFoundException(staff));
         User user =
             userRepository.findById(UUID.fromString(consumer)).orElseThrow(() -> new UserNotFoundException(consumer));
         boolean closed = false;
-        roomRepository.save(new Room(cs, user, closed));
+        Room save = roomRepository.save(new Room(cs, user, closed));
+        UUID id = save.getId();
+        return id.toString();
     }
 
     public void close(String roomId) {

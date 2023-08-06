@@ -23,18 +23,18 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    // adding new User to database
+    // adding new User to database and return User id
     @PostMapping("/newUser")
     @ResponseBody
-    public void addUser(@RequestParam String name) {
-        chatService.addUser(name);
+    public String addUser(@RequestParam String name) {
+        return chatService.addUser(name);
     }
 
-    // adding new Customer Support to database
+    // adding new Customer Support to database and returns CS id
     @PostMapping("/newCS")
     @ResponseBody
-    public void addCS(@RequestParam String name) {
-        chatService.addCS(name);
+    public String addCS(@RequestParam String name) {
+        return chatService.addCS(name);
     }
 
     // sending message from sender to reciever in the form of MessageRequest
@@ -60,8 +60,8 @@ public class ChatController {
     // all messages associated with these 2 people will be stored
     @PostMapping("newRoom")
     @ResponseBody
-    public void createRoom(@RequestParam String staff, String consumer) {
-        chatService.createRoom(staff, consumer);
+    public String createRoom(@RequestParam String staff, String consumer) {
+        return chatService.createRoom(staff, consumer);
     }
 
     // marking room as closed will make it unavailable for users
