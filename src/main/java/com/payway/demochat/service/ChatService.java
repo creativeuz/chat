@@ -1,15 +1,15 @@
 package com.payway.demochat.service;
 
 import com.payway.demochat.exception.UserNotFoundException;
-import com.payway.demochat.model.CS;
+import com.payway.demochat.model.Staff;
+import com.payway.demochat.model.Customer;
 import com.payway.demochat.model.Message;
 import com.payway.demochat.model.MessageResponse;
 import com.payway.demochat.model.Room;
-import com.payway.demochat.model.User;
-import com.payway.demochat.repository.CSRepository;
+import com.payway.demochat.repository.StaffRepository;
+import com.payway.demochat.repository.CustomerRepository;
 import com.payway.demochat.repository.MessageRepository;
 import com.payway.demochat.repository.RoomRepository;
-import com.payway.demochat.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,30 +19,30 @@ import java.util.UUID;
 @Service
 public class ChatService {
 
-    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final MessageRepository messageRepository;
     private final RoomRepository roomRepository;
-    private final CSRepository cSRepository;
+    private final StaffRepository staffRepository;
 
     public ChatService(
-        UserRepository userRepository,
+        CustomerRepository customerRepository,
         MessageRepository messageRepository,
         RoomRepository roomRepository,
-        CSRepository cSRepository
+        StaffRepository staffRepository
     ) {
-        this.userRepository = userRepository;
+        this.customerRepository = customerRepository;
         this.messageRepository = messageRepository;
         this.roomRepository = roomRepository;
-        this.cSRepository = cSRepository;
+        this.staffRepository = staffRepository;
     }
 
-    public String addUser(String name) {
-        User save = userRepository.save(new User(name));
+    public String addCustomer(String name) {
+        Customer save = customerRepository.save(new Customer(name));
         return save.getId().toString();
     }
 
-    public String addCS(String name) {
-        CS save = cSRepository.save(new CS(name));
+    public String addStaff(String name) {
+        Staff save = staffRepository.save(new Staff(name));
         return save.getId().toString();
     }
 
@@ -82,11 +82,12 @@ public class ChatService {
     }
 
     public String createRoom(String staff, String consumer) {
-        CS cs = cSRepository.findById(UUID.fromString(staff)).orElseThrow(() -> new UserNotFoundException(staff));
-        User user =
-            userRepository.findById(UUID.fromString(consumer)).orElseThrow(() -> new UserNotFoundException(consumer));
+        Staff cs = staffRepository.findById(UUID.fromString(staff)).orElseThrow(() -> new UserNotFoundException(staff));
+        Customer customer =
+            customerRepository.findById(UUID.fromString(consumer))
+                .orElseThrow(() -> new UserNotFoundException(consumer));
         boolean closed = false;
-        Room save = roomRepository.save(new Room(cs, user, closed));
+        Room save = roomRepository.save(new Room(cs, customer, closed));
         UUID id = save.getId();
         return id.toString();
     }

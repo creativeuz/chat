@@ -29,11 +29,11 @@ public class Room {
 
     @ManyToOne
     @JoinColumn(name = "staff")
-    private CS staff;
+    private Staff staff;
 
     @ManyToOne
-    @JoinColumn(name = "consumer")
-    private User consumer;
+    @JoinColumn(name = "customer")
+    private Customer customer;
 
     @Column(name = "closed")
     private boolean isClosed;
@@ -41,9 +41,9 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private List<Message> messages;
 
-    public Room(CS staff, User consumer, boolean isClosed) {
+    public Room(Staff staff, Customer customer, boolean isClosed) {
         this.staff = staff;
-        this.consumer = consumer;
+        this.customer = customer;
         this.isClosed = isClosed;
     }
 }

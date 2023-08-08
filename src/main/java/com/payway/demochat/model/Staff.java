@@ -1,6 +1,5 @@
 package com.payway.demochat.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,21 +17,20 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "users")
-public class User {
-    // CUSTOMER
+@Table(name = "staff")
+public class Staff {
+    // CUSTOMER SUPPORT
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToMany(mappedBy = "consumer")
+    @OneToMany(mappedBy = "staff")
     List<Room> listOfRooms;
 
-    @Column(name = "user_name")
-    private String userName;
+    private String name;
 
-    public User(String userName) {
-        this.userName = userName;
+    public Staff(String name) {
+        this.name = name;
     }
 }

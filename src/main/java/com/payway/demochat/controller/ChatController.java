@@ -3,16 +3,16 @@ package com.payway.demochat.controller;
 import com.payway.demochat.model.MessageRequest;
 import com.payway.demochat.model.MessageResponse;
 import com.payway.demochat.service.ChatService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ChatController {
 
     private final ChatService chatService;
@@ -23,18 +23,18 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    // adding new User to database and return User id
-    @PostMapping("/newUser")
+    // adding new Customer to database and return Customer id
+    @PostMapping("/newCustomer")
     @ResponseBody
-    public String addUser(@RequestParam String name) {
-        return chatService.addUser(name);
+    public String addCustomer(@RequestParam String name) {
+        return chatService.addCustomer(name);
     }
 
-    // adding new Customer Support to database and returns CS id
-    @PostMapping("/newCS")
+    // adding new Customer Support to database and returns Staff id
+    @PostMapping("/newStaff")
     @ResponseBody
-    public String addCS(@RequestParam String name) {
-        return chatService.addCS(name);
+    public String addStaff(@RequestParam String name) {
+        return chatService.addStaff(name);
     }
 
     // sending message from sender to reciever in the form of MessageRequest
